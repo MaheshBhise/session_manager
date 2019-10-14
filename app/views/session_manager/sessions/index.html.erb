@@ -1,0 +1,35 @@
+<%- model_class = SessionManager::Session -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table border=1 class="sessions">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:email) %></th>
+      <th><%= model_class.human_attribute_name(:last_seen) %></th>
+      <th><%= model_class.human_attribute_name(:archived) %></th>
+      <th><%= model_class.human_attribute_name(:user_agent) %></th>
+      <th><%= model_class.human_attribute_name(:login_time) %></th>
+      <th><%= model_class.human_attribute_name(:logout_time) %></th>
+      <th><%= model_class.human_attribute_name(:ip_address) %></th>
+      <th><%= model_class.human_attribute_name(:token) %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @sessions.each do |session| %>
+      <tr>
+        <td><%= session.id %></td>
+        <td><%= session.email %></td>
+        <td><%= session.last_seen %></td>
+        <td><%= session.archived %></td>
+        <td><%= session.user_agent %></td>
+        <td><%= session.login_time %></td>
+        <td><%= session.logout_time %></td>
+        <td><%= session.ip_address %></td>
+        <td title=<%= session.token %>><%= session.token.truncate(16) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<%= paginate @sessions %>
